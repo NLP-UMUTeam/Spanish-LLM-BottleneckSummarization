@@ -47,13 +47,19 @@ This work was published in **Applied Sciences** (MDPI):
 - **Publisher page:** https://www.mdpi.com/2076-3417/15/21/11834
 
 
-# Can LLMs Generate Coherent Summaries? Leveraging LLM Summarization for Spanish-language News Articles
+### Abstract
 Automatic summarization is crucial to handle the large volume of news articles produced every day.  
 This paper investigates whether **Large Language Models** can generate **coherent and factually grounded summaries** of Spanish-language news, using the **DACSA** dataset as benchmark. :contentReference[oaicite:6]{index=6}  
 
 We evaluate several strategies: **zero-shot prompting**, **one-shot prompting**, **fine-tuning** of seq2seq models (mBART, mT5), and a novel **bottleneck prompting** approach that integrates attention-based sentence salience with **Named Entity Recognition (NER)**. Our experiments show that instruction-tuned LLMs achieve competitive performance in zero- and one-shot settings, often approaching fine-tuned baselines. The bottleneck method improves factual accuracy and content selection, especially for larger models such as **LLaMA-3.1-70B** and **Gemma-2-9B**, yielding measurable gains in **ROUGE** and **BERTScore/BETOScore**. :contentReference[oaicite:7]{index=7}  
 
 These findings indicate that **structured, entity-anchored prompting** can complement conventional fine-tuning, offering an effective and cost-efficient alternative for multilingual summarization in low-resource settings.
+
+
+### System architecture
+The next figure illustrates the workflow of our proposed bottleneck prompting framework for Spanish news summarization using the DACSA dataset. The dataset is divided into training and testing splits. We only use the training split for random one-shot exemplar selection. In this step, we select a single article-summary pair to serve as an in-context demonstration for all models. The test split is processed through a highlight extractor, which generates candidate segments from each articles. These highlights are analyzed by two complementary modules: (i) a NER module, based on XLM-RoBERTa-large, which detects entities of different types; and (ii) a salience scoring module, which computes attention-based relevance scores using the BERT model.
+
+![Descripción](llm_summary.png)
 
 
 ### Methods
@@ -107,6 +113,7 @@ This research was funded by the *Secretary of Science, Humanities, Technology, a
 
 
 ### Citation
+```
 @article{pan2025can,
   title={Can LLMs Generate Coherent Summaries? Leveraging LLM Summarization for Spanish-Language News Articles},
   author={Pan, Ronghao and Bernal-Beltr{\'a}n, Tom{\'a}s and Salas-Z{\'a}rate, Mar{\'\i}a del Pilar and Paredes-Valverde, Mario Andr{\'e}s and Garc{\'\i}a-D{\'\i}az, Jos{\'e} Antonio and Valencia-Garc{\'\i}a, Rafael},
@@ -117,6 +124,6 @@ This research was funded by the *Secretary of Science, Humanities, Technology, a
   year={2025},
   publisher={MDPI}
 }
-
+```
 
 
